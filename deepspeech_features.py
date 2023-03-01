@@ -17,7 +17,7 @@ def conv_audios_to_deepspeech(audios,
                               out_files,
                               num_frames_info,
                               deepspeech_pb_path,
-                              audio_window_size=16,
+                              audio_window_size=1,
                               audio_window_stride=1):
     """
     Convert list of audio files into files with DeepSpeech features.
@@ -86,9 +86,9 @@ def prepare_deepspeech_net(deepspeech_pb_path):
 
     graph = tf.compat.v1.get_default_graph()
     tf.import_graph_def(graph_def, name="deepspeech")
-    logits_ph = graph.get_tensor_by_name("deepspeech/logits:0")
-    input_node_ph = graph.get_tensor_by_name("deepspeech/input_node:0")
-    input_lengths_ph = graph.get_tensor_by_name("deepspeech/input_lengths:0")
+    logits_ph = graph.get_tensor_by_name("logits:0")
+    input_node_ph = graph.get_tensor_by_name("input_node:0")
+    input_lengths_ph = graph.get_tensor_by_name("input_lengths:0")
 
     return graph, logits_ph, input_node_ph, input_lengths_ph
 
@@ -139,7 +139,7 @@ def pure_conv_audio_to_deepspeech(audio,
     network_output = net_fn(input_vector)
 
     deepspeech_fps = 50
-    video_fps = 60
+    video_fps = 25
     audio_len_s = float(audio.shape[0]) / audio_sample_rate
     if num_frames is None:
         num_frames = int(round(audio_len_s * video_fps))
