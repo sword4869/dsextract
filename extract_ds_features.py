@@ -84,11 +84,14 @@ def extract_features(in_audios,
         deepspeech_pb_path=deepspeech_pb_path)
 
 
-def main():
+def main(cmd=None):
     """
     Main body of script.
     """
-    args = parse_args()
+    if cmd != None:
+        args = parse_args(cmd)
+    else:
+        args = parse_args()
     in_audio = os.path.expanduser(args.input)
     if not os.path.exists(in_audio):
         raise Exception("Input file/directory doesn't exist: {}".format(in_audio))
