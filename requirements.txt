@@ -2,13 +2,12 @@
 # conda install cudatoolkit=10.0 -c nvidia
 # cudnn cuDNN v7.6.5
 
-
--i http://pypi.douban.com/simple 
---trusted-host pypi.douban.com
-
-protobuf==3.20.0
-tensorflow-gpu==1.15.5
+# protobuf==3.20.0
+# tensorflow-gpu==1.15.5
+protobuf
+tensorflow
 resampy
 python_speech_features
 numpy
 pandas
+scipy
