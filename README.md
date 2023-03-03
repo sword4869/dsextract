@@ -4,7 +4,7 @@ Several routines for [DeepSpeech](https://github.com/mozilla/DeepSpeech) feature
 ## Installation
 
 ```bash
-conda create -n py37 python=3.7 -y
+conda create -n py38 python=3.8 -y
 pip install -r requirements.txt
 ```
 
