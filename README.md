@@ -20,7 +20,7 @@ python3 extract_wav.py --in-video=<you_data_dir>
 Generate files with DeepSpeech features:
 ```bash
 # one wav file
-python extract_ds_features.py --input /home/sword/Videos/语音/result/ans_wav/001.wav --output /home/sword/Videos/语音/result/ans_wav/001.ds.npy --deepspeech ~/Downloads/deepspeech-0_1_0-b90017e8.pb
+python extract_ds_features.py --input /home/sword/Videos/语音/result/ans_wav/001.wav --output ~/Desktop/001.ds.npy --deepspeech ~/Downloads/deepspeech-0_1_0-b90017e8.pb
 
 # a directory includes wav files
 python extract_ds_features.py --input /home/sword/Videos/语音/result/ans_wav --deepspeech ~/Downloads/deepspeech-0_1_0-b90017e8.pb

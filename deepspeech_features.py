@@ -57,6 +57,7 @@ def conv_audios_to_deepspeech(audios,
                         input_node_ph: x[np.newaxis, ...],
                         input_lengths_ph: [x.shape[0]]}))
             np.save(out_file_path, ds_features)
+            print(audio_file_path)
 
 
 def prepare_deepspeech_net(deepspeech_pb_path):
