@@ -39,6 +39,11 @@ def parse_args():
         "--metainfo",
         type=str,
         help="path to file with meta-information")
+    parser.add_argument(
+        "--video_fps",
+        type=int,
+        default=25,
+        help="fps of output video")
 
     args = parser.parse_args()
     return args
@@ -47,6 +52,7 @@ def parse_args():
 def extract_features(in_audios,
                      out_files,
                      deepspeech_pb_path,
+                     video_fps,
                      metainfo_file_path=None):
     """
     Real extract audio from video file.
@@ -76,12 +82,13 @@ def extract_features(in_audios,
     for i, in_audio in enumerate(in_audios):
         if not out_files[i]:
             file_stem, _ = os.path.splitext(in_audio)
-            out_files[i] = file_stem + ".ds.npy"
+            out_files[i] = file_stem + ".npy"
     conv_audios_to_deepspeech(
         audios=in_audios,
         out_files=out_files,
         num_frames_info=num_frames_info,
-        deepspeech_pb_path=deepspeech_pb_path)
+        deepspeech_pb_path=deepspeech_pb_path,
+        video_fps=video_fps)
 
 
 def main(cmd=None):
@@ -107,7 +114,8 @@ def main(cmd=None):
             in_audios=[in_audio],
             out_files=[args.output],
             deepspeech_pb_path=deepspeech_pb_path,
-            metainfo_file_path=args.metainfo)
+            metainfo_file_path=args.metainfo,
+            video_fps=args.video_fps)
     else:
         audio_file_paths = []
         for file_name in os.listdir(in_audio):
@@ -123,7 +131,8 @@ def main(cmd=None):
             in_audios=audio_file_paths,
             out_files=out_file_paths,
             deepspeech_pb_path=deepspeech_pb_path,
-            metainfo_file_path=args.metainfo)
+            metainfo_file_path=args.metainfo,
+            video_fps=args.video_fps)
 
 
 if __name__ == "__main__":

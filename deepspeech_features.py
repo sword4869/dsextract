@@ -18,7 +18,8 @@ def conv_audios_to_deepspeech(audios,
                               num_frames_info,
                               deepspeech_pb_path,
                               audio_window_size=1,
-                              audio_window_stride=1):
+                              audio_window_stride=1,
+                              video_fps=30):
     """
     Convert list of audio files into files with DeepSpeech features.
 
@@ -55,9 +56,32 @@ def conv_audios_to_deepspeech(audios,
                     logits_ph,
                     feed_dict={
                         input_node_ph: x[np.newaxis, ...],
-                        input_lengths_ph: [x.shape[0]]}))
+                        input_lengths_ph: [x.shape[0]]
+                    }
+                ),
+                video_fps=video_fps
+            )
+            # (9598, 1, 29)
             np.save(out_file_path, ds_features)
-            print(audio_file_path)
+
+            # # (9598, 29)
+            # net_output = ds_features.reshape(-1, 29)
+            # win_size = 16
+            # zero_pad = np.zeros((int(win_size / 2), net_output.shape[1]))
+            # # (9614, 29)
+            # net_output = np.concatenate(
+            #     (zero_pad, net_output, zero_pad), axis=0)
+            # windows = []
+            # for window_index in range(0, net_output.shape[0] - win_size, 2):
+            #     windows.append(
+            #         net_output[window_index:window_index + win_size])
+            # window_index = net_output.shape[0] - win_size
+            # windows.append(net_output[window_index:window_index + win_size])
+            # # (4800, 16, 29) = 9588 / 2 + 1 
+            # windows = np.array(windows)
+
+            # print(audio_file_path)
+            # np.save(out_file_path, windows)
 
 
 def prepare_deepspeech_net(deepspeech_pb_path):
@@ -99,7 +123,8 @@ def pure_conv_audio_to_deepspeech(audio,
                                   audio_window_size,
                                   audio_window_stride,
                                   num_frames,
-                                  net_fn):
+                                  net_fn,
+                                  video_fps):
     """
     Core routine for converting audion into DeepSpeech features.
 
@@ -140,7 +165,6 @@ def pure_conv_audio_to_deepspeech(audio,
     network_output = net_fn(input_vector)
 
     deepspeech_fps = 50
-    video_fps = 25
     audio_len_s = float(audio.shape[0]) / audio_sample_rate
     if num_frames is None:
         num_frames = int(round(audio_len_s * video_fps))

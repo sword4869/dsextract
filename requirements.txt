@@ -1,10 +1,8 @@
-# python 3.8
-# conda install cudatoolkit=11.7 -c nvidia
-
-protobuf
-tensorflow
-resampy
-python_speech_features
+ffmpeg
 numpy
 pandas
+protobuf
+python_speech_features
+resampy
 scipy
+tensorflow
