@@ -3,6 +3,7 @@ Several routines for [DeepSpeech](https://github.com/mozilla/DeepSpeech) feature
 
 ## Installation
 
+
 ```bash
 conda install cudatoolkit=11.7 -c nvidia
 
@@ -12,8 +13,8 @@ pip install -r requirements.txt
 https://github.com/osmr/deepspeech_features/releases/download/v0.0.1/deepspeech-0_1_0-b90017e8.pb.zip
 
 ## Differences
-
-1. add the feature: `video-fps=50`
+1. **using the new version of tensorflow 2.12.0** , rather than original version of 1.15
+2. add the feature: `video-fps=50`
 ## Usage
 
 extract wav audio(ar=16000, ac=1) files from video:
