@@ -1,5 +1,6 @@
 """
     Script for extracting audio (16-bit, mono, 22000 Hz) from video file.
+    其实就是使用 ffmpeg 提取
 """
 
 import os
