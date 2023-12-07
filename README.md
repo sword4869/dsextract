@@ -32,19 +32,22 @@ python3 extract_wav.py --in-video=~/Music/Obama.mp4 --out-audio=~/Music/1.wav
 python3 extract_wav.py --in-video=~/Music
 ```
 
-extract DeepSpeech features from wav audio:
-```bash
-# one wav file
-# 默认输出的fps=25, 下载deepspeech权重文件，输出同路径下
-python extract_ds_features.py --input ~/Music/Obama.wav 
-# 指定输出路径文件名，指定已下载的deepspeech权重文件，指定ds_fps 50
-python extract_ds_features.py --input ~/Music/Obama.wav --output ~/Desktop/001.npy --deepspeech ~/Downloads/deepspeech-0_1_0-b90017e8.pb --ds_fps 50
+extract DeepSpeech features from wav audio
 
-# a directory includes some wav files
-python extract_ds_features.py --input ~/Music
-python extract_ds_features.py --input ~/Music --deepspeech ~/Downloads/deepspeech-0_1_0-b90017e8.pb --ds_fps 50
-```
+- 非voca的，陈sir的，结果和voca不对，用不了:
+   ```bash
+   # one wav file
+   # 默认输出的fps=25, 下载deepspeech权重文件，输出同路径下
+   python extract_ds_features.py --input ~/Music/Obama.wav 
+   # 指定输出路径文件名，指定已下载的deepspeech权重文件，指定ds_fps 50
+   python extract_ds_features.py --input ~/Music/Obama.wav --output ~/Desktop/001.npy --deepspeech ~/Downloads/deepspeech-0_1_0-b90017e8.pb --ds_fps 50
 
-## Future Work
+   # a directory includes some wav files
+   python extract_ds_features.py --input ~/Music
+   python extract_ds_features.py --input ~/Music --deepspeech ~/Downloads/deepspeech-0_1_0-b90017e8.pb --ds_fps 50
+   ```
+- voca改
 
-在`deepspeech_features.py`中的`conv_audios_to_deepspeech()`中，有关于 sliding windows of deepspeech feature的部分。
+   ```bash
+   python audio_handler.py --deepspeech_graph_fname D:\Models\deepspeech-0_1_0-b90017e8.pb --audio_path D:\DataSet\Talk\audio.wav --ds_fps 30 --output_file D:\DataSet\Talk\audio.npy
+   ```
