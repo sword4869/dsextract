@@ -5,10 +5,9 @@ Several routines for [DeepSpeech](https://github.com/mozilla/DeepSpeech) feature
 
 
 ```bash
-conda install cudatoolkit=12.1 -c nvidia
+# conda install cudatoolkit=12.1 -c nvidia
 
-pip install -r requirements.txt
-pip install -r requirements_fixed.txt
+pip install git+https://github.com/sword4869/dsextract.git
 ```
 
 https://github.com/osmr/deepspeech_features/releases/download/v0.0.1/deepspeech-0_1_0-b90017e8.pb.zip
@@ -24,13 +23,13 @@ extract wav audio(ar=16000, ac=1) files from video:
 ```bash
 # 单个视频
 # 输出的音频同视频名.wav
-python3 extract_wav.py --in-video=~/Music/Obama.mp4
+extract_wav --in-video=~/Music/Obama.mp4
 # 指定输出的音频名，但还是wav格式
-python3 extract_wav.py --in-video=~/Music/Obama.mp4 --out-audio=~/Music/1.wav
+extract_wav --in-video=~/Music/Obama.mp4 --out-audio=~/Music/1.wav
 
 # 包含多个视频的文件夹
 # 跳过非文件的子文件夹，只支持mp4,mkv,avi格式，输出的音频同各视频名
-python3 extract_wav.py --in-video=~/Music
+extract_wav --in-video=~/Music
 ```
 
 extract DeepSpeech features from wav audio
@@ -50,5 +49,5 @@ extract DeepSpeech features from wav audio
 - voca改
 
    ```bash
-   python audio_handler.py --deepspeech_graph_fname D:\Models\deepspeech-0_1_0-b90017e8.pb --audio_path D:\DataSet\Talk\audio.wav --ds_fps 30 --output_file D:\DataSet\Talk\audio.npy
+   dsextract --deepspeech_graph_fname D:\Models\deepspeech-0_1_0-b90017e8.pb --audio_path D:\DataSet\Talk\audio.wav --ds_fps 30 --output_file D:\DataSet\Talk\audio.npy
    ```

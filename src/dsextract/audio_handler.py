@@ -142,7 +142,7 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-if __name__ == '__main__':
+def main():
     args = parse_args()
     audio_handler = AudioHandler(args)
     deepspeech_feature = audio_handler.process(args.audio_path)
@@ -150,3 +150,6 @@ if __name__ == '__main__':
     np.save(args.output_file, deepspeech_feature)
     print('Saved to {}'.format(args.output_file))
     # python .\audio_handler.py --deepspeech_graph_fname D:\Models\deepspeech-0_1_0-b90017e8.pb --audio_path D:\DataSet\Talk\audio.wav --ds_fps 30 --output_file D:\DataSet\Talk\audio.npy
+
+if __name__ == '__main__':
+    main()
