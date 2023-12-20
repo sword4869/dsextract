@@ -5,17 +5,18 @@ Several routines for [DeepSpeech](https://github.com/mozilla/DeepSpeech) feature
 
 
 ```bash
-conda install cudatoolkit=11.7 -c nvidia
+conda install cudatoolkit=12.1 -c nvidia
 
 pip install -r requirements.txt
+pip install -r requirements_fixed.txt
 ```
 
 https://github.com/osmr/deepspeech_features/releases/download/v0.0.1/deepspeech-0_1_0-b90017e8.pb.zip
 
 ## Differences
 1. **using the new version**
-   - tensorflow(计算图): 1.15 → 2.12.0+
-   - numpy(np.float): <1.20→ 1.20+
+   - tensorflow(计算图): 1.15 → 2.15.0+
+   - numpy(np.float): <1.20→ 1.26.2+
 2. add the args to control fps of deepspeech feature: `ds_fps` 
 ## Usage
 

@@ -1,8 +1,0 @@
-ffmpeg
-numpy
-pandas
-protobuf
-python_speech_features
-resampy
-scipy
-tensorflow<2

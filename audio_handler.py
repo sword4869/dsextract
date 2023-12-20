@@ -92,20 +92,20 @@ class AudioHandler:
             raise FileNotFoundError("Audio file not found: {}".format(audio_path))
 
         # Load graph and place_holders
-        with tf.gfile.GFile(self.deepspeech_graph_fname, "rb") as f:
-            graph_def = tf.GraphDef()
+        with tf.io.gfile.GFile(self.deepspeech_graph_fname, "rb") as f:
+            graph_def = tf.compat.v1.GraphDef()
             graph_def.ParseFromString(f.read())
 
-        graph = tf.get_default_graph()
+        graph = tf.compat.v1.get_default_graph()
         tf.import_graph_def(graph_def, name="deepspeech")
-        input_tensor = graph.get_tensor_by_name('deepspeech/input_node:0')
-        seq_length = graph.get_tensor_by_name('deepspeech/input_lengths:0')
-        layer_6 = graph.get_tensor_by_name('deepspeech/logits:0')
+        input_tensor = graph.get_tensor_by_name('input_node:0')
+        seq_length = graph.get_tensor_by_name('input_lengths:0')
+        layer_6 = graph.get_tensor_by_name('logits:0')
 
         n_input = 26
         n_context = 9
 
-        with tf.Session(graph=graph) as sess:
+        with tf.compat.v1.Session(graph=graph) as sess:
             resampled_audio = resampy.resample(audio_sample.astype(float), sample_rate, 16000)
             input_vector = audioToInputVector(resampled_audio.astype('int16'), 16000, n_input, n_context)
 
